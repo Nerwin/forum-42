@@ -1,0 +1,26 @@
+[
+    {
+        "body": "Rule 1: xxxxxxxx\nRule 2: xxxxxxxxx",
+        "userId": "4242424242",
+        "timestamp": "2020-11-14T18:30:10.512Z",
+        "forumId": "210dd8774d"
+    },
+    {
+        "body": "Hey Mike, do you want to go on Mars with me ?",
+        "userId": "69f469dc05",
+        "timestamp": "2020-11-14T18:36:40.815Z",
+        "forumId": "6f2047559c"
+    },
+    {
+        "body": "Hi Elon :) Humm no, why would i go this far, instead you should come with me at 8000m on K2 submit",
+        "userId": "4322dc161c",
+        "timestamp": "2020-11-14T18:37:22.543Z",
+        "forumId": "6f2047559c"
+    },
+    {
+        "body": "I will, but through FaceTime thanks to my Starlink constellation :D",
+        "userId": "69f469dc05",
+        "timestamp": "2020-11-14T18:37:56.623Z",
+        "forumId": "6f2047559c"
+    }
+]
