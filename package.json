@@ -4,7 +4,7 @@
   "description": "Real-time forum app",
   "main": "src/index.ts",
   "scripts": {
-    "start": "tsc",
+    "start": "ts-node src/index.ts",
     "start:prod": "node build/index.js",
     "build": "tsc --build",
     "dev": "nodemon --exec ts-node src/index.ts",
