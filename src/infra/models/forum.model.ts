@@ -1,9 +1,15 @@
-import { IsString, IsNotEmpty, Length } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  Length,
+  IsHexadecimal,
+  IsArray,
+} from 'class-validator';
 
 import { guidGenerator } from '../../utils/guidGenerator';
 
 class Forum {
-  @IsString()
+  @IsHexadecimal()
   @IsNotEmpty()
   id: string;
 
@@ -14,15 +20,13 @@ class Forum {
   @IsNotEmpty()
   creatorId: string;
 
-  admins: string[];
-
+  @IsArray()
   members: string[];
 
   constructor(name: string, creatorId: string) {
     this.id = guidGenerator();
     this.name = name;
     this.creatorId = creatorId;
-    this.admins = [];
     this.members = [];
   }
 }

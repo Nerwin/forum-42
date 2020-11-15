@@ -3,7 +3,6 @@
         "id": "0e65c84543",
         "name": "General",
         "creatorId": "4242424242",
-        "admins": [],
         "members": [
             "d7eceac031",
             "69f469dc05",
@@ -15,7 +14,6 @@
         "id": "210dd8774d",
         "name": "Rules",
         "creatorId": "4242424242",
-        "admins": [],
         "members": [
             "d7eceac031",
             "69f469dc05",
@@ -27,7 +25,6 @@
         "id": "6f2047559c",
         "name": "Pub 42",
         "creatorId": "4242424242",
-        "admins": [],
         "members": [
             "69f469dc05",
             "17f8309ab9",

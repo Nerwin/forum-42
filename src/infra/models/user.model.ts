@@ -4,12 +4,13 @@ import {
   Length,
   IsOptional,
   IsUrl,
+  IsHexadecimal,
 } from 'class-validator';
 
 import { guidGenerator } from '../../utils/guidGenerator';
 
 class User {
-  @IsString()
+  @IsHexadecimal()
   @IsNotEmpty()
   id: string;
 

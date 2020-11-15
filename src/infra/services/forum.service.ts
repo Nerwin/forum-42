@@ -11,6 +11,30 @@ class ForumService extends Service<Forum> {
     return super.findAll();
   }
 
+  addMember(id: string, memberId: string) {
+    const forum = this.findById(id);
+    if (!forum) {
+      throw Error(`Cannot find forum with id ${id}`);
+    }
+
+    const index = this._data.findIndex((forum) => forum.id === id);
+
+    return super.update(index, forum);
+  }
+
+  updateById(id: string, data: Partial<Forum>) {
+    const forum = this.findById(id);
+    if (!forum) {
+      throw Error(`Cannot find forum with id ${data.id}`);
+    }
+
+    const index = this._data.findIndex((forum) => forum.id === data.id);
+
+    const updatedForum = { ...forum, ...data } as Forum;
+
+    return super.update(index, updatedForum);
+  }
+
   findAllByCreator(creatorId: string) {
     const filterByName = (forum: Forum) => forum.creatorId === creatorId;
     return super.find(filterByName);
@@ -23,7 +47,6 @@ class ForumService extends Service<Forum> {
 
   async create(name: string, creatorId: string) {
     const forum = new Forum(name, creatorId);
-
     return await super.createWithValidation(forum);
   }
 

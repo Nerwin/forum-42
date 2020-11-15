@@ -24,6 +24,11 @@ class UserService extends Service<User> {
     return super.find(filterById).shift();
   }
 
+  findManyById(ids: string[]) {
+    const filterById = (user: User) => ids.includes(user.id);
+    return super.find(filterById);
+  }
+
   findByName(name: string) {
     const filterByName = (user: User) => user.name === name;
     return super.find(filterByName).shift();
