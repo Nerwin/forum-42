@@ -4,6 +4,7 @@ import { gql } from 'apollo-server-express';
 // *** We could separate queries / mutations from types, but since the entity is quite small i will keep them in the same file.
 export default gql`
   type Query {
+    forum(id: String!): Forum
     forumList: [Forum]
     forumListByCreator(creatorId: String!): [Forum]
     forumListByMember(memberId: String!): [Forum]
@@ -11,7 +12,7 @@ export default gql`
 
   type Mutation {
     createForum(name: String!): Forum
-    addMember(id: String!, memberId: String!): Boolean
+    addMember(forumId: String!, memberId: String!): Boolean
   }
 
   type Forum {

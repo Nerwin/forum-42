@@ -10,9 +10,10 @@ export default gql`
   }
 
   type Mutation {
-    createMessage(name: String!): Message
+    createMessage(body: String!, forumId: String!): Message
   }
 
+  # Would be used by client for real time
   type Subscription {
     messageAdded(forumId: String!): Message
   }

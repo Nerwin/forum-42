@@ -6,6 +6,7 @@ export default gql`
   scalar Date
 
   type Query {
+    user(id: String!): User
     userList: [User]
   }
 

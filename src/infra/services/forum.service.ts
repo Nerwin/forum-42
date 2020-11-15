@@ -17,6 +17,8 @@ class ForumService extends Service<Forum> {
       throw Error(`Cannot find forum with id ${id}`);
     }
 
+    forum.members.push(memberId);
+
     const index = this._data.findIndex((forum) => forum.id === id);
 
     return super.update(index, forum);
@@ -47,6 +49,11 @@ class ForumService extends Service<Forum> {
 
   async create(name: string, creatorId: string) {
     const forum = new Forum(name, creatorId);
+
+    if (this.findByName(name)) {
+      throw Error('Forum with this name already exist');
+    }
+
     return await super.createWithValidation(forum);
   }
 

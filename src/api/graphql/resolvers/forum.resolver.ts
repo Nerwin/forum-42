@@ -1,37 +1,42 @@
+import { ForumAddMemberInput } from '../../../infra/dto/forumAddMemberInput.dto';
 import { ForumCreateInput } from '../../../infra/dto/forumCreateInput.dto';
 import { ForumSearchInput } from '../../../infra/dto/forumSearchInput.dto';
-import { ForumAddMemberInput } from '../../../infra/dto/forumAddMemberInput.dto';
-import forumService from '../../../infra/services/forum.service';
-import userService from '../../../infra/services/user.service';
 import messageService from '../../../infra/services/message.service';
 import validateObject from '../../../infra/validations/validator';
+import forumService from '../../../infra/services/forum.service';
+import userService from '../../../infra/services/user.service';
 import { Forum } from '../../../infra/models';
+import { ApolloContext } from '../../../interfaces';
 
 export default {
   Query: {
-    forumList: async function (obj: any, args: any) {
+    forum: (obj: any, { id }: ForumSearchInput) => {
+      return forumService.findById(id!);
+    },
+
+    forumList: () => {
       return forumService.findAll();
     },
 
-    forumListByCreator: async function (obj: any, args: ForumSearchInput) {
-      return forumService.findAllByCreator(args.creatorId!);
+    forumListByCreator: (obj: any, { creatorId }: ForumSearchInput) => {
+      return forumService.findAllByCreator(creatorId!);
     },
 
-    forumListByMember: async function (obj: any, args: ForumSearchInput) {
-      return forumService.findAllByMember(args.memberId!);
+    forumListByMember: (obj: any, { memberId }: ForumSearchInput) => {
+      return forumService.findAllByMember(memberId!);
     },
   },
 
   Forum: {
-    creator: async function (obj: Forum) {
+    creator: (obj: Forum) => {
       return userService.findById(obj.creatorId);
     },
 
-    members: async function (obj: Forum) {
+    members: (obj: Forum) => {
       return userService.findManyById(obj.members);
     },
 
-    messages: async function (obj: Forum) {
+    messages: (obj: Forum) => {
       return messageService
         .findAllByForumId(obj.id)
         .sort((a, b) => (a.timestamp < b.timestamp ? -1 : 1));
@@ -39,16 +44,20 @@ export default {
   },
 
   Mutation: {
-    createForum: async function (obj: any, args: ForumCreateInput) {
+    createForum: async (
+      obj: any,
+      args: ForumCreateInput,
+      { user }: ApolloContext
+    ) => {
       await validateObject(args);
 
-      return await forumService.create(args.name, args.creatorId);
+      return await forumService.create(args.name, user.id);
     },
 
-    addMember: async function (obj: any, args: ForumAddMemberInput) {
+    addMember: async (obj: any, args: ForumAddMemberInput) => {
       await validateObject(args);
 
-      await forumService.addMember(args.id, args.memberId);
+      await forumService.addMember(args.forumId, args.memberId);
 
       return true;
     },

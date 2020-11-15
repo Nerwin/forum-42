@@ -16,6 +16,10 @@ class UserService extends Service<User> {
   async create(name: string, pictureUri?: string) {
     const user = new User(name, pictureUri);
 
+    if (this.findByName(name)) {
+      throw Error('User with this name already exist');
+    }
+
     return await super.createWithValidation(user);
   }
 

@@ -2,7 +2,7 @@ import { IsHexadecimal } from 'class-validator';
 
 export class ForumAddMemberInput {
   @IsHexadecimal()
-  public id: string;
+  public forumId: string;
 
   @IsHexadecimal()
   public memberId: string;
